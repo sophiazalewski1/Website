@@ -1,0 +1,109 @@
+html{
+    scroll-behavior: smooth;
+}
+#caption{
+    font-family: "Libre Franklin", "Helvetica Neue", sans-serif;
+    font-weight: 300;
+    font-size: 1.5rem;
+    line-height: 1.55em;
+    grid-column: text;
+    padding-bottom: 20px;
+}
+/* ================= NAVIGATION BAR =============== */
+#navlink_holder {
+    margin: 0px 40px 0px 0px;
+    padding: 15px 0px 5px 15px;
+    top: 200px;
+    left: 15px;
+    width: 200px;
+    list-style-type: none;
+    overflow: hidden;
+    background-color: #119e6a;
+    position:fixed;
+    letter-spacing: 0.1px;
+    font-size:18px;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 10px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.navlink{
+    display: block;
+    color: white;
+    text-align: right;
+    padding: 5px 5px;
+    padding-right: 10px;
+    margin-right: 10px;
+    text-decoration: none;
+    margin-bottom: 10px;
+    background-color: #04AA6D;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 10px 20px 0 rgba(0, 0, 0, 0.19);
+    width: 170px;
+    transition: all 0.1s ease-in-out;
+}
+.navlink:hover {
+    background-color: #04AA6D;
+    width: 180px;
+    transition: all 0.1s ease-in-out;
+}
+/* =================== CONTENT ================= */
+body{
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", Arial, sans-serif;
+    font-size: 19px;
+    font-weight: 300;
+    font-size: 1.2rem;
+    line-height: 1.55em;
+    margin: 0;
+}
+#body{
+    padding-left: 290px;
+    padding-right: min(230px,15%);
+    padding-top: 60px;
+}
+h1{
+    font-size: 50px;
+    margin-bottom: 20px;
+    line-height: 1.5em;
+}
+h3{
+    margin-bottom: 18px;
+    font-size: 24px;
+    font-weight: bold;
+}
+h4{
+    margin: 0px;
+}
+li a:hover {
+    background-color: #fbff07;
+    width: 180px;
+    transition: all 0.1s ease-in-out;
+}
+/* ================ AUTHORS BOX ============== */
+.grid-container {
+    display: grid;
+    grid-template-columns: auto auto;
+    padding: 10px;
+}
+.grid-item {
+    padding: 5px;
+    text-align: center;
+}
+
+.link {
+    scroll-margin-top: 100px;
+}
+/* ================ PROGESS TABLE ============== */
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+tr {
+    border-bottom: 1px solid #aaaaaa;
+    font-size: 17px;
+    
+}
+td {
+    padding: 5px 15px 5px 15px;
+    min-width: 80px;
+}
+tr:nth-child(even) {
+    background-color: #f3f3f3;
+}
