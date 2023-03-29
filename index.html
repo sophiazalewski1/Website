@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Website Title</title>
+        <title>Parallel Graph Algorithms</title>
         <link rel="stylesheet" href="style.css">
         <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=default'></script>
     </head>
@@ -64,7 +64,32 @@
             </div>
             <div id="The Challenge", class="link">
             <h3>The Challenge</h3>
-            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+            <p>
+            Graph traversal algorithms like Dinic's and Borůvka's algorithm  
+            are difficult to parallelize because any paths in the graph that share
+            an edge cannot be manipulated simultaneously without violating correctness. 
+            The only "independent" paths in graphs for the sake 
+            of our algorithms are paths that do not share verticies, which make
+            parallalizing these algorithms highly unintuitive.
+            </p>
+            
+            <p>
+             Moreover, there is also 
+            little locality in graph traversal because each edge in a path is
+            stored on a different cache-line, and large graphs are not even able 
+            to fit in a single cache. In addition to this, the computation in 
+            these algorithms is very low compared to the amount of communication
+            that must be done between processes, and no two runs of any graph
+            travseral algorithm cover the same "steps" in finding their path,
+            meaning that our algorithms are also highly divergent.   
+            </p>
+            <p>
+            These challenges hint that parallelizing our graph algorithms in lower
+            level languages may yeild very low performance. This is why we aim to
+            explore the differences between parallel implementations in OpenMP
+            as well as the less programmable GraphLab interface, to see which 
+            interface is necessary to achieve our desired performance.
+            </p>
             </div>
             <div id="Resources", class="link">
             <h3>Resources</h3>
