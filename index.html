@@ -10,14 +10,13 @@
     </head>
     
     <body>
-            <ul id="navlink_holder">
-                <li><a href="#Top" class="navlink">Top</a></li>
-                <li><a href="#Summary" class="navlink">Summary</a></li>
-                <li><a href="#Background" class="navlink">Background</a></li>
-                <li><a href="#Approach" class="navlink">Approach</a></li>
-                <li><a href="#Results" class="navlink">Results</a></li>
-                <li><a href="#Goals and Deliverables" class="navlink">Goals + Deliverables</a></li>
-            </ul>
+        <ul id="navlink_holder">
+          <li><a href="#Top" class="navlink">Top</a></li>
+          <li><a href="#Summary" class="navlink">About the Project</a></li>
+          <li><a href="#Approach" class="navlink">Approach</a></li>
+          <li><a href="#Results" class="navlink">Results</a></li>
+          <li><a href="#Goals and Deliverables" class="navlink">Goals + Deliverables</a></li>
+        </ul>
         <div id="body">
             <div id="Top", class="link"></div>
             <h1>Parallel Graph Algorithm Implementations in GraphLab and C++</h1>
@@ -26,17 +25,17 @@
                 to explore the trade-offs between domain specific 
                 and lower level programming languages. 
                 </a></div>
-        <hr>
-        <div class="grid-container">
-            <div class="grid-item"><h4>Authors</h4></div>
-            <div class="grid-item"><h4>Affiliations</h4></div>
-            <div class="grid-item">Sophia Zalewski</div>
-            <div class="grid-item">Carnegie Mellon University</div>
-            <div class="grid-item">Scott Routledge</div>
-            <div class="grid-item">Carnegie Mellon University</div>
-          </div>
-        <hr>
-         <div id="Summary", class="link">
+          <br><hr>
+          <div class="grid-container">
+              <div class="grid-item"><h4>Authors</h4></div>
+              <div class="grid-item"><h4>Affiliations</h4></div>
+              <div class="grid-item">Sophia Zalewski</div>
+              <div class="grid-item">Carnegie Mellon University</div>
+              <div class="grid-item">Scott Routledge</div>
+              <div class="grid-item">Carnegie Mellon University</div>
+            </div>
+            <br><hr>
+          <div id="Summary", class="link">
             <h3>Summary</h3> 
             <img src="min_cut.png" width="300" height="auto" style="float:right">
             This project implements various parallel graph algorithms to explore 
@@ -61,13 +60,157 @@
             including graph search, contraction, and clustering. We then evaluate 
             the effectiveness of the parallel frameworks using two main metrics: 
             ease of programming and performance. </p>
-            </div>
-            <div id="Background", class="link">
+          </div>
+          <div id="Background", class="link">
             <h3>Background</h3>
-            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-            </div>
+            <h4>1. Max Flow</h4>
+            <p>Max Flow is a classic graph optimization problem where the goal is to push some abstract “flow"
+            across edges in a directed graph from some source vertex 𝑠 to some sink 𝑡. More concretely, let
+            𝐺 = (𝑉 , 𝐸) be a directed graph. Each (𝑢, 𝑣) ∈ 𝐸 has some positive capacity 𝑐 (𝑢, 𝑣) indicating how
+            much flow can be pushed from 𝑢 to 𝑣. The goal is to find some flow 𝑓 which can be thought of as a
+            function mapping edges to how much flow is being pushed through them. This flow must have the
+            following properties:</p>
+
+            $$0 \leq f(u,v) \leq c(u,v) \\
+            \sum_u f(u,v) = \sum_u f(u,v) \text{ for all } v \notin \{s,t\}$$
+
+            <p>where the first constraint enforces that no edge has more flow than its capacity and the second
+            condition enforces that for all vertices other than 𝑠 and 𝑡. The simplest algorithm for finding max
+            flow is called Ford Fulkerson. Ford Fulkerson works by repeatedly finding a path from 𝑠 − 𝑡 that
+            increase the overall flow from 𝑠 − 𝑡 and updating some state. The “state" is called the residual graph
+            𝐺′ and allows the algorithm to backtrack if necessary. Ford Fulkerson finds “augmenting paths" by
+            running a graph search with source 𝑠 and target 𝑡 on the residual graph. Here, we can use a parallel
+            implementation of Breadth First Search (BFS). </p>
+            
+            <p>A more complicated yet efficient algorithm, Dinics,
+            finds a set of augmenting paths called a “blocking flow" each iteration by making up to |𝐸| calls to
+            depth first search. In Dinics it is therefore possible to add an addition axis of parallelism in finding
+            blocking flows. Another extension to the Max Flow problem introduces a cost function to each
+            edge that charges a flow $(𝑢, 𝑣) for each unit of flow pushed through (𝑢, 𝑣). The objective becomes
+            finding a maximum flow that also minimizes cost. If we have additional time, we will explore these
+            extensions to the Ford Fulkerson algorithm [2].</p>
+
+            <h4>2. Minimum Spanning Tree </h4>
+            <p>Another important graph optimization problem is Minimum Spanning Tree (MST). A minimum
+            spanning tree for a fully connected, undirected and weighted graph is a subset of the edges that
+            connect all the vertices without forming cycles and whose edge sum is minimized. There are many
+            popular algorithms for finding an MST in parallel such as Borůvka’s Algorithm. In Borůvka’s
+            algorithm, each vertex starts out in its own tree, then, it greedily adds minimum edges to connect
+            each component until there is only one tree left containing all vertices. On the surface Borůvka’s
+            algorithm is pretty straight forward to parallelize: each component can add its smallest incident
+            each to the graph in parallel. The work and span of Borůvka’s are 𝑂 (𝐸𝑙𝑜𝑔𝑉 ) and 𝑂 (𝑙𝑜𝑔𝑉 ) but
+            further optimizations can be done to improve the work bounds [3].</p>
+
+            <h4>3. PageRank</h4>
+            <p>PageRank is a newer graph algorithm designed by Larry Page and Sergey Brin for ranking the
+            importance of web pages for their search engine, Google. The algorithm judges the importance
+            of a website by estimating the probability that someone randomly clicking links will end up on
+            that page. By representing the hyperlinks as a graph where an edge connects page 𝐴 to page 𝐵
+            if 𝐴 contains a link to 𝐵, the probability distribution can be calculated iteratively. Each iteration,
+            the PageRank value of a vertex is distributed evenly among its outgoing neighbors while at the
+            same time its new PageRank value is computed by combining the contributions from its incoming
+            neighbors. This process repeats until the graph converges [4]. Because PageRank is defined in
+            terms of an update policy for each vertex at every iteration, it is relatively easy to program in
+            GraphLab. In a lower level framework like C++ and OpenMP there are a lot more ways to organize
+            the computations and the schedule for the updates. One of the goals of our project will be to see if
+            we can beat the performance of the GraphLab implementation using this greater flexibility.</p>
+          </div>
+          <div id="Challenges", class="link">
+            <h3>Challenges</h3>
+            <ul>
+              <li>Graph algorithms contain dependcies between any paths that share an edge</li>
+              <li>Very little locality in graph traversal algorithms, each edge in a path
+                is in a different cache-line</li>
+              <li>Low computation to communication ratio</li>
+              <li>Divergent execution since no two runs of a graph traversal traverse the same path</li>
+            </ul>
+          </div>
+          <div id="Resources", class="link">
+            <h3>Resources</h3>
+            <p>For this project, we are using Ford Fulkerson starter code from https://www.programiz.com/dsa/ford-
+              fulkerson-algorithm and Bourvka’s algorithm starter code from https://www.geeksforgeeks.org/boruvkas-
+              algorithm-greedy-algo-9/, and will code our own sequential PageRank implementation in Python.
+              We will use these implementations as our correctness tests for our parallel implementations.
+              After implementing and parallelizing our algorithms, we will be running our implementations
+              on the Gates and PSC machines to test our code on a high number of CPU and GPUs and measure
+              performance and scalability</p>
+          </div>
+          <div id="Goals + Deliverables", class="link">
+            <h3>Goals and Deliverables</h3>
+            <h4>1. Plan to Achieve</h4>
+            <p>
+              We plan to be able to implement at least 2 of the 3 graph algorithms described above in both
+              OpenMP and GraphLab. Since the span is the same as the work for Ford Fulkerson, achieving
+              a large speedup on this algorithm is unlikely, so any relatively fair speedup is desired for this
+              algorithm. For Boruvka’s algorithm, the maximum theoretical speedup is equal to the number of
+              edges, so we expect to see (and hope to achieve) a more linear speedup with this algorithm.
+              We hope to create interactive visualizations on our website that show the speed differences of
+              each algorithm on the different platforms; for example, we may have progress bars all starting at
+              the same time to help the user visualize the speedup differences between platforms, showing each
+              platform’s "progress" through the given algorithm on a specified graph.
+              We will also demonstrate speedup graphs comparing OpenMP and GraphLab implementations
+              to each other, and to the sequential naive versions of each algorithm. In addition, we will also
+              produce plots timing various sections of each algorithm across the different platforms. In doing this,
+              we hope to be able to produce an analysis comparing the trade offs of the GraphLab and OpenMP
+              languages.
+            </p>
+            <h4>2. Hope to Achieve</h4>
+            <p>If time allows, we will also implement the PageRank algorithm to have a further metric of comparison
+              between GraphLab and OpenMP. Furthermore, if we are extra ahead of schedule we will also
+              consider an implementation in MPI, since for very large graphs message passing might be more
+              efficient than OpenMP, given that very large graphs may be too large to fit in one memory system.
+              If we are struggling to complete all of the implementations on all of the platforms, we will simply
+              focus on one algorithm and do a more in-depth analysis on the differences in OpenMP and Graphlab
+              for that specific algorithm.</p>
+          </div>
+          <div id="Platform", class="link">
+            <h3>Platform Choice</h3>
+            <p>We are exploring GraphLab for one of our implementation platforms because this language is
+              specifically designed and optimized for parallelizing graph algorithms. We will compare this to
+              OpenMP, since this a shared memory platform, and graph problems will require updating lots
+              of shared memory locations. We are mainly considering CPU implementations rather than GPU,
+              because graph traversal algorithms are highly divergent and may not benefit from GPUs.
+              3
+              </p>
+          </div>
+          <div id="Schedule", class="link">
+            <h3>Project Schedule</h3>
+            <table>
+              <tr>
+                <th>Timeframe</th>
+                <th>Goal</th>
+              </tr>
+              <tr>
+                <td>3/27-4/03</td>
+                <td>Write project proposal, 
+                  find baseline sequential implemenations for our algorithms,
+                  and create a testcase-generating script
+                </td>
+              </tr>
+              <tr>
+                <td>4/03-4/10</td>
+                <td>Get GraphLab set up, begin parallelizing FF's with OpenMP and GraphLab</td>
+              </tr>
+              <tr>
+                <td>4/10-4/17</td>
+                <td>Continuing parallelizing FF's, write Milestone Report</td>
+              </tr>
+              <tr>
+                <td>4/17-4/24</td>
+                <td>Begin parallelizing Boruvka's algorithm in OpenMP and GraphLab </td>
+              </tr>
+              <tr>
+                <td>4/24-4/30</td>
+                <td>Begin parallelizing Page Rank's algorithm in OpenMP and GraphLab</td>
+              </tr>
+              <tr>
+                 <td>4/30-5/5</td>
+                 <td>Prepare deliverables for poster session and Final Report</td>
+              </tr>
+            </table>
+          </div>
             <div id="Approach", class="link">
-            <h3>Approach</h3>
+            <h3>Approach</h3><hr>
             <p>
             Graph traversal algorithms like Ford Fulkerson's and Borůvka's algorithm  
             are difficult to parallelize because any paths in the graph that share
@@ -96,7 +239,7 @@
             </div>
           </div>
             <div id="Results", class="link">
-            <h3>Results</h3>
+            <h3>Results</h3><hr>
             Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
             
             <div class="cards">
@@ -105,41 +248,8 @@
             </div>
    
             </div>
-            <div id="Goals and Deliverables", class="link">
+            <div id="Scedule", class="link">
             <h3>Goals and Deliverables</h3>
-            <table>
-                <tr>
-                  <th>Timeframe</th>
-                  <th>Goal</th>
-                </tr>
-                <tr>
-                  <td>3/27-4/03</td>
-                  <td>Write project proposal, 
-                    find baseline sequential implemenations for our algorithms,
-                    and create a testcase-generating script
-                  </td>
-                </tr>
-                <tr>
-                  <td>4/03-4/10</td>
-                  <td>Get GraphLab set up, begin parallelizing FF's with OpenMP and GraphLab</td>
-                </tr>
-                <tr>
-                  <td>4/10-4/17</td>
-                  <td>Continuing parallelizing FF's, write Milestone Report</td>
-                </tr>
-                <tr>
-                  <td>4/17-4/24</td>
-                  <td>Begin parallelizing Boruvka's algorithm in OpenMP and GraphLab </td>
-                </tr>
-                <tr>
-                  <td>4/24-4/30</td>
-                  <td>Begin parallelizing Page Rank's algorithm in OpenMP and GraphLab</td>
-                </tr>
-                <tr>
-                   <td>4/30-5/5</td>
-                   <td>Prepare deliverables for poster session and Final Report</td>
-                </tr>
-              </table>
             <p>
               Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
             </p>
