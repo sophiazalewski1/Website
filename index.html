@@ -3,6 +3,9 @@
     <head>
         <title>Parallel Graph Algorithms</title>
         <link rel="stylesheet" href="style.css">
+        <script src='javascript.js'></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script> 
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
         <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=default'></script>
     </head>
     
@@ -11,8 +14,8 @@
                 <li><a href="#Top" class="navlink">Top</a></li>
                 <li><a href="#Summary" class="navlink">Summary</a></li>
                 <li><a href="#Background" class="navlink">Background</a></li>
-                <li><a href="#The Challenge" class="navlink">The Challenge</a></li>
-                <li><a href="#Resources" class="navlink">Resources</a></li>
+                <li><a href="#Approach" class="navlink">Approach</a></li>
+                <li><a href="#Results" class="navlink">Results</a></li>
                 <li><a href="#Goals and Deliverables" class="navlink">Goals + Deliverables</a></li>
             </ul>
         <div id="body">
@@ -33,7 +36,7 @@
             <div class="grid-item">Carnegie Mellon University</div>
           </div>
         <hr>
-            <div id="Summary", class="link">
+         <div id="Summary", class="link">
             <h3>Summary</h3> 
             <img src="min_cut.png" width="300" height="auto" style="float:right">
             This project implements various parallel graph algorithms to explore 
@@ -42,7 +45,7 @@
             We compare the implementations of:
             <ul>
             <li>
-            <a href=https://en.wikipedia.org/wiki/Dinic%27s_algorithm target="_blank">Dinic's Algorithm</a> 
+            <a href=https://en.wikipedia.org/wiki/Ford%E2%80%93Fulkerson_algorithm target="_blank">Ford Fulkerson's Algorithm</a> 
             for Max-Flow, </li>
             <li>
             <a href="https://en.wikipedia.org/wiki/Bor%C5%AFvka%27s_algorithm#:~:text=Bor%C5%AFvka's%20algorithm%20is%20a%20greedy,graph%20that%20is%20not%20connected.&text=It%20was%20first%20published%20in,efficient%20electricity%20network%20for%20Moravia." target="_blank">Borůvka's algorithm </a>
@@ -58,42 +61,49 @@
             including graph search, contraction, and clustering. We then evaluate 
             the effectiveness of the parallel frameworks using two main metrics: 
             ease of programming and performance. </p>
+            </div>
             <div id="Background", class="link">
             <h3>Background</h3>
             Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
             </div>
-            <div id="The Challenge", class="link">
-            <h3>The Challenge</h3>
+            <div id="Approach", class="link">
+            <h3>Approach</h3>
             <p>
-            Graph traversal algorithms like Dinic's and Borůvka's algorithm  
+            Graph traversal algorithms like Ford Fulkerson's and Borůvka's algorithm  
             are difficult to parallelize because any paths in the graph that share
             an edge cannot be manipulated simultaneously without violating correctness. 
             The only "independent" paths in graphs for the sake 
             of our algorithms are paths that do not share verticies, which make
             parallalizing these algorithms highly unintuitive.
             </p>
-            
-            <p>
-             Moreover, there is also 
-            little locality in graph traversal because each edge in a path is
-            stored on a different cache-line, and large graphs are not even able 
-            to fit in a single cache. In addition to this, the computation in 
-            these algorithms is very low compared to the amount of communication
-            that must be done between processes, and no two runs of any graph
-            travseral algorithm cover the same "steps" in finding their path,
-            meaning that our algorithms are also highly divergent.   
-            </p>
-            <p>
-            These challenges hint that parallelizing our graph algorithms in lower
-            level languages may yeild very low performance. This is why we aim to
-            explore the differences between parallel implementations in OpenMP
-            as well as the less programmable GraphLab interface, to see which 
-            interface is necessary to achieve our desired performance.
-            </p>
+           
+            <div class="tab">
+              <button class="tab" onclick="openPage('p1')">main.cpp</button>
+              <button class="tab" onclick="openPage('p2')">ford_fulkerson_seq.cpp</button>
+              <button class="tab" onclick="openPage('p3')">ford_fulkerson_par.cpp</button>
+              <span onclick="closeAllPages()" id="close">&times; Close</span>
             </div>
-            <div id="Resources", class="link">
-            <h3>Resources</h3>
+            <div id = "codeArea">
+            <div id="p1" class="page">
+              <script src="https://emgithub.com/embed-v2.js?target=https%3A%2F%2Fgithub.com%2Fsophiazalewski1%2F418-Final%2Fblob%2Fmain%2Fmain.cpp&style=default&type=code&showBorder=on&showLineNumbers=on&showFileMeta=on&showFullPath=on&showCopy=on"></script></div>
+            
+            <div id="p2" class="page" style="display:none">
+              <script src="https://emgithub.com/embed-v2.js?target=https%3A%2F%2Fgithub.com%2Fsophiazalewski1%2F418-Final%2Fblob%2Fmain%2FFord%2520Fulkerson%2Fford_fulkerson_seq.cpp&style=default&type=code&showBorder=on&showLineNumbers=on&showFileMeta=on&showCopy=on"></script></div>
+            
+            <div id="p3" class="page" style="display:none">
+              <script src="https://emgithub.com/embed-v2.js?target=https%3A%2F%2Fgithub.com%2Fsophiazalewski1%2F418-Final%2Fblob%2Fmain%2FFord%2520Fulkerson%2Fford_fulkerson_par.cpp&style=default&type=code&showBorder=on&showLineNumbers=on&showFileMeta=on&showCopy=on"></script></div>
+            
+            </div>
+          </div>
+            <div id="Results", class="link">
+            <h3>Results</h3>
             Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+            
+            <div class="cards">
+              <div class="card"><canvas id="myChart"></canvas></div>
+              <div class="card">Hello World</div>
+            </div>
+   
             </div>
             <div id="Goals and Deliverables", class="link">
             <h3>Goals and Deliverables</h3>
@@ -111,11 +121,11 @@
                 </tr>
                 <tr>
                   <td>4/03-4/10</td>
-                  <td>Get GraphLab set up, begin parallelizing Dinic's with OpenMP and GraphLab</td>
+                  <td>Get GraphLab set up, begin parallelizing FF's with OpenMP and GraphLab</td>
                 </tr>
                 <tr>
                   <td>4/10-4/17</td>
-                  <td>Continuing parallelizing Dinic's, write Milestone Report</td>
+                  <td>Continuing parallelizing FF's, write Milestone Report</td>
                 </tr>
                 <tr>
                   <td>4/17-4/24</td>
@@ -143,6 +153,8 @@
             <div class="grid-item"><img class="profile_img" src="scott.jpeg"/></div>
             <div class="grid-item"><b>Sophia Zalewski</b></div>
             <div class="grid-item"><b>Scott Routledge</b></div>
+            <div class="grid-item"><a href="https://www.linkedin.com/in/sophia-zalewski-70a7121aa/">Linkedin</a></div>
+            <div class="grid-item">Linkedin: </div>
         </div>
     </body>
 </html>
