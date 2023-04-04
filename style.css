@@ -11,6 +11,9 @@ html{
     padding-bottom: 20px;
 }
 /* ================= NAVIGATION BAR =============== */
+#selectedLink{
+    background-color:rgb(0, 88, 31);
+}
 #navlink_holder {
     margin: 0px 40px 0px 0px;
     padding: 15px 0px 5px 15px;
@@ -39,10 +42,31 @@ html{
     width: 170px;
     transition: all 0.1s ease-in-out;
 }
+.navlink_hidden{
+    display: block;
+    color: white;
+    padding: 3px;
+    padding-left: 10px;
+    text-decoration: none;
+    width: 170px;
+}
+#hiddenNav{
+    display: block;
+    height: 0px;
+    overflow:hidden;
+    transition: all .2s ease-in-out;
+}
 .navlink:hover {
     background-color: #04AA6D;
     width: 180px;
     transition: all 0.1s ease-in-out;
+}
+.navlink_hidden:hover{
+    background-color: #018857;
+    transition: all 0.1s ease-in-out;
+}
+#navlink_holder:hover > #hiddenNav{
+    height: 270px;
 }
 /* =================== CONTENT ================= */
 body{
@@ -170,8 +194,6 @@ tr:nth-child(even) {
     padding: 0px !important;
     margin: 0px !important;
 }
-.card{
-}
 .cards {
     max-width: 1200px;
     margin: 0 auto;
@@ -186,4 +208,17 @@ tr:nth-child(even) {
 }
 @media (min-width: 1000px) {
     .card { padding: 2rem 6rem 2rem 4rem;}
+}
+/*=========== PAGE 2 =========*/
+#titleBox{
+    width: 100%;
+    position:fixed;
+    background: white;
+    z-index: 10000;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+#title{
+    padding: 10px 0px 10px 290px; /* top right bottom left */
+    margin: 0px;
+    font-size: 40px;
 }

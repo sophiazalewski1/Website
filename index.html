@@ -11,8 +11,18 @@
     
     <body>
         <ul id="navlink_holder">
-          <li><a href="#Top" class="navlink">Top</a></li>
-          <li><a href="#Summary" class="navlink">About the Project</a></li>
+          <li><a href="#Top" class="navlink" id="selectedLink">About the Project</a></li>
+          <div id="hiddenNav">
+            <li><a href="#Summary" class="navlink_hidden">Summary</a></li>
+            <li><a href="#Background" class="navlink_hidden">Background</a></li>
+            <li><a href="#Challenges" class="navlink_hidden">Challenges</a></li>
+            <li><a href="#Resources" class="navlink_hidden">Resources</a></li>
+            <li><a href="#Goals and Deliverables" class="navlink_hidden">Goals + Deliverables</a></li>
+            <li><a href="#Platform" class="navlink_hidden">Platform</a></li>
+            <li><a href="#Schedule" class="navlink_hidden">Schedule</a></li>
+          </div>
+          
+          <li><a href="./page2.html" class="navlink">Implementation</a></li>
           <li><a href="#Approach" class="navlink">Approach</a></li>
           <li><a href="#Results" class="navlink">Results</a></li>
           <li><a href="#Goals and Deliverables" class="navlink">Goals + Deliverables</a></li>
@@ -24,7 +34,7 @@
                 We present various parallel graph algorithm implementations 
                 to explore the trade-offs between domain specific 
                 and lower level programming languages. 
-                </a></div>
+            </div>
           <br><hr>
           <div class="grid-container">
               <div class="grid-item"><h4>Authors</h4></div>
@@ -135,7 +145,7 @@
               on the Gates and PSC machines to test our code on a high number of CPU and GPUs and measure
               performance and scalability</p>
           </div>
-          <div id="Goals + Deliverables", class="link">
+          <div id="Goals and Deliverables", class="link">
             <h3>Goals and Deliverables</h3>
             <h4>1. Plan to Achieve</h4>
             <p>
@@ -209,53 +219,8 @@
               </tr>
             </table>
           </div>
-            <div id="Approach", class="link">
-            <h3>Approach</h3><hr>
-            <p>
-            Graph traversal algorithms like Ford Fulkerson's and Borůvka's algorithm  
-            are difficult to parallelize because any paths in the graph that share
-            an edge cannot be manipulated simultaneously without violating correctness. 
-            The only "independent" paths in graphs for the sake 
-            of our algorithms are paths that do not share verticies, which make
-            parallalizing these algorithms highly unintuitive.
-            </p>
-           
-            <div class="tab">
-              <button class="tab" onclick="openPage('p1')">main.cpp</button>
-              <button class="tab" onclick="openPage('p2')">ford_fulkerson_seq.cpp</button>
-              <button class="tab" onclick="openPage('p3')">ford_fulkerson_par.cpp</button>
-              <span onclick="closeAllPages()" id="close">&times; Close</span>
-            </div>
-            <div id = "codeArea">
-            <div id="p1" class="page">
-              <script src="https://emgithub.com/embed-v2.js?target=https%3A%2F%2Fgithub.com%2Fsophiazalewski1%2F418-Final%2Fblob%2Fmain%2Fmain.cpp&style=default&type=code&showBorder=on&showLineNumbers=on&showFileMeta=on&showFullPath=on&showCopy=on"></script></div>
-            
-            <div id="p2" class="page" style="display:none">
-              <script src="https://emgithub.com/embed-v2.js?target=https%3A%2F%2Fgithub.com%2Fsophiazalewski1%2F418-Final%2Fblob%2Fmain%2FFord%2520Fulkerson%2Fford_fulkerson_seq.cpp&style=default&type=code&showBorder=on&showLineNumbers=on&showFileMeta=on&showCopy=on"></script></div>
-            
-            <div id="p3" class="page" style="display:none">
-              <script src="https://emgithub.com/embed-v2.js?target=https%3A%2F%2Fgithub.com%2Fsophiazalewski1%2F418-Final%2Fblob%2Fmain%2FFord%2520Fulkerson%2Fford_fulkerson_par.cpp&style=default&type=code&showBorder=on&showLineNumbers=on&showFileMeta=on&showCopy=on"></script></div>
-            
-            </div>
-          </div>
-            <div id="Results", class="link">
-            <h3>Results</h3><hr>
-            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-            
-            <div class="cards">
-              <div class="card"><canvas id="myChart"></canvas></div>
-              <div class="card">Hello World</div>
-            </div>
-   
-            </div>
-            <div id="Scedule", class="link">
-            <h3>Goals and Deliverables</h3>
-            <p>
-              Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-            </p>
-            </div>
         </div>
-        <br>
+        <br><br><br>
         </div>
       <div id="footer">
           <div class="grid-container">

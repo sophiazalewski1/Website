@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Parallel Graph Algorithms</title>
+        <link rel="stylesheet" href="style.css">
+        <script src='javascript.js'></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script> 
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+        <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=default'></script>
+    </head>
+    
+    <body>
+        <ul id="navlink_holder">
+          <li><a href="./index.html" class="navlink">About the Project</a></li>
+          <li><a href="./page2.html" class="navlink" id="selectedLink">Implementation</a></li>
+          <li><a href="#Approach" class="navlink">Approach</a></li>
+          <li><a href="#Results" class="navlink">Results</a></li>
+          <li><a href="#Goals and Deliverables" class="navlink">Goals + Deliverables</a></li>
+        </ul>
+        <div id="titleBox", class="link">
+          <h1 id="title">Results</h1>
+        </div>
+        <div id="body" style="padding-top: 80px;">
+            <div id="Approach", class="link">
+            <h3>Implementation</h3><hr>
+            <p>
+            The C++ implementation code for each of our algorithms is included below, and
+            our full code is also availabile on Github <a href="https://github.com/sophiazalewski1/418-Final">here.</a>
+            </p>
+           
+            <div class="tab">
+              <button class="tab" onclick="openPage('p1')">main.cpp</button>
+              <button class="tab" onclick="openPage('p2')">ford_fulkerson_seq.cpp</button>
+              <button class="tab" onclick="openPage('p3')">ford_fulkerson_par.cpp</button>
+              <span onclick="closeAllPages()" id="close">&times; Close</span>
+            </div>
+            <div id = "codeArea">
+            <div id="p1" class="page">
+              <script src="https://emgithub.com/embed-v2.js?target=https%3A%2F%2Fgithub.com%2Fsophiazalewski1%2F418-Final%2Fblob%2Fmain%2Fmain.cpp&style=default&type=code&showBorder=on&showLineNumbers=on&showFileMeta=on&showFullPath=on&showCopy=on"></script></div>
+            
+            <div id="p2" class="page" style="display:none">
+              <script src="https://emgithub.com/embed-v2.js?target=https%3A%2F%2Fgithub.com%2Fsophiazalewski1%2F418-Final%2Fblob%2Fmain%2FFord%2520Fulkerson%2Fford_fulkerson_seq.cpp&style=default&type=code&showBorder=on&showLineNumbers=on&showFileMeta=on&showCopy=on"></script></div>
+            
+            <div id="p3" class="page" style="display:none">
+              <script src="https://emgithub.com/embed-v2.js?target=https%3A%2F%2Fgithub.com%2Fsophiazalewski1%2F418-Final%2Fblob%2Fmain%2FFord%2520Fulkerson%2Fford_fulkerson_par.cpp&style=default&type=code&showBorder=on&showLineNumbers=on&showFileMeta=on&showCopy=on"></script></div>
+            
+            </div>
+          </div>
+            <div id="Results", class="link">
+            <h3>Results</h3><hr>
+            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+            
+            <div class="cards">
+              <div class="card"><canvas id="myChart"></canvas></div>
+              <div class="card">Hello World</div>
+            </div>
+   
+            </div>
+            <div id="Scedule", class="link">
+            <h3>Goals and Deliverables</h3>
+            <p>
+              Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+            </p>
+            </div>
+        </div>
+        <br>
+        </div>
+      <div id="footer">
+          <div class="grid-container">
+            <div class="grid-item"><img class="profile_img" src="profile.jpeg"/></div>
+            <div class="grid-item"><img class="profile_img" src="scott.jpeg"/></div>
+            <div class="grid-item"><b>Sophia Zalewski</b></div>
+            <div class="grid-item"><b>Scott Routledge</b></div>
+            <div class="grid-item"><a href="https://www.linkedin.com/in/sophia-zalewski-70a7121aa/">Linkedin</a></div>
+            <div class="grid-item">Linkedin: </div>
+        </div>
+    </body>
+</html>
