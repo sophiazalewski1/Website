@@ -16,8 +16,8 @@ html{
 }
 #navlink_holder {
     margin: 0px 40px 0px 0px;
-    padding: 15px 0px 5px 15px;
-    top: 200px;
+    padding: 150px 0px 5px 15px;
+    top: 0px;
     left: 15px;
     width: 200px;
     list-style-type: none;
@@ -50,9 +50,9 @@ html{
     text-decoration: none;
     width: 170px;
 }
-#hiddenNav{
+.hiddenNav{
     display: block;
-    height: 0px;
+    height: 50px;
     overflow:hidden;
     transition: all .2s ease-in-out;
 }
@@ -65,8 +65,8 @@ html{
     background-color: #018857;
     transition: all 0.1s ease-in-out;
 }
-#navlink_holder:hover > #hiddenNav{
-    height: 270px;
+.hiddenNav:hover{
+    height: 320px;
 }
 /* =================== CONTENT ================= */
 body{
@@ -210,15 +210,3 @@ tr:nth-child(even) {
     .card { padding: 2rem 6rem 2rem 4rem;}
 }
 /*=========== PAGE 2 =========*/
-#titleBox{
-    width: 100%;
-    position:fixed;
-    background: white;
-    z-index: 10000;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-}
-#title{
-    padding: 10px 0px 10px 290px; /* top right bottom left */
-    margin: 0px;
-    font-size: 40px;
-}
