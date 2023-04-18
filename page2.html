@@ -11,18 +11,27 @@
     
     <body>
         <ul id="navlink_holder">
-          <li><a href="./index.html" class="navlink">About the Project</a></li>
-          <li><a href="./page2.html" class="navlink" id="selectedLink">Implementation</a></li>
-          <li><a href="#Approach" class="navlink">Approach</a></li>
-          <li><a href="#Results" class="navlink">Results</a></li>
-          <li><a href="#Goals and Deliverables" class="navlink">Goals + Deliverables</a></li>
+          <div class="hiddenNav">
+            <li><a href="./index.html" class="navlink">About the Project</a></li>
+              <li><a href="./index.html#Summary" class="navlink_hidden">Summary</a></li>
+              <li><a href="./index.html#Background" class="navlink_hidden">Background</a></li>
+              <li><a href="./index.html#Challenges" class="navlink_hidden">Challenges</a></li>
+              <li><a href="./index.html#Resources" class="navlink_hidden">Resources</a></li>
+              <li><a href="./index.html#Goals and Deliverables" class="navlink_hidden">Goals + Deliverables</a></li>
+              <li><a href="./index.html#Platform" class="navlink_hidden">Platform</a></li>
+              <li><a href="./index.html#Schedule" class="navlink_hidden">Schedule</a></li>
+          </div>
+          <div class="hiddenNav" style="max-height:140px; box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+            <li><a href="./page2.html" id="selectedLink" class="navlink">Implementation</a></li>
+            <li><a href="#Our Code" class="navlink_hidden">Our Code</a></li>
+            <li><a href="#Approach" class="navlink_hidden">Approach</a></li>
+          </div>  
+            <li><a href="./page3.html" class="navlink">Results</a></li>
         </ul>
-        <div id="titleBox", class="link">
-          <h1 id="title">Results</h1>
-        </div>
-        <div id="body" style="padding-top: 80px;">
-            <div id="Approach", class="link">
-            <h3>Implementation</h3><hr>
+        <div id="body" style="padding-top: 0px;">
+            <h1>Implementation</h1>
+            <div id="Our Code", class="link">
+            <h3>Our Code</h3>
             <p>
             The C++ implementation code for each of our algorithms is included below, and
             our full code is also availabile on Github <a href="https://github.com/sophiazalewski1/418-Final">here.</a>
@@ -46,8 +55,8 @@
             
             </div>
           </div>
-            <div id="Results", class="link">
-            <h3>Results</h3><hr>
+            <div id="Approach", class="link">
+            <h3>Parallelization Approach</h3>
             Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
             
             <div class="cards">
