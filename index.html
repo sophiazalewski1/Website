@@ -11,8 +11,8 @@
     
     <body>
         <ul id="navlink_holder">
+          <div class="hiddenNav">
           <li><a href="#Top" class="navlink" id="selectedLink">About the Project</a></li>
-          <div id="hiddenNav">
             <li><a href="#Summary" class="navlink_hidden">Summary</a></li>
             <li><a href="#Background" class="navlink_hidden">Background</a></li>
             <li><a href="#Challenges" class="navlink_hidden">Challenges</a></li>
@@ -21,11 +21,12 @@
             <li><a href="#Platform" class="navlink_hidden">Platform</a></li>
             <li><a href="#Schedule" class="navlink_hidden">Schedule</a></li>
           </div>
-          
-          <li><a href="./page2.html" class="navlink">Implementation</a></li>
-          <li><a href="#Approach" class="navlink">Approach</a></li>
-          <li><a href="#Results" class="navlink">Results</a></li>
-          <li><a href="#Goals and Deliverables" class="navlink">Goals + Deliverables</a></li>
+          <div class="hiddenNav" style="max-height:140px;">
+            <li><a href="./page2.html" class="navlink">Implementation</a></li>
+            <li><a href="./page2.html#Our Code" class="navlink_hidden">Our Code</a></li>
+            <li><a href="./page2.html#Approach" class="navlink_hidden">Approach</a></li>
+          </div>  
+          <li><a href="./page3.html" class="navlink">Results</a></li>
         </ul>
         <div id="body">
             <div id="Top", class="link"></div>
@@ -50,19 +51,19 @@
             <img src="min_cut.png" width="300" height="auto" style="float:right">
             This project implements various parallel graph algorithms to explore 
             the trade-offs between using a higher level, domain specific programming 
-            language (GraphLab) and a general lower level language (C++ with OpenMP).
+            language (such as GraphLab) and a general lower level language (C++ with OpenMP).
             We compare the implementations of:
             <ul>
             <li>
             <a href=https://en.wikipedia.org/wiki/Ford%E2%80%93Fulkerson_algorithm target="_blank">Ford Fulkerson's Algorithm</a> 
             for Max-Flow, </li>
             <li>
-            <a href="https://en.wikipedia.org/wiki/Bor%C5%AFvka%27s_algorithm#:~:text=Bor%C5%AFvka's%20algorithm%20is%20a%20greedy,graph%20that%20is%20not%20connected.&text=It%20was%20first%20published%20in,efficient%20electricity%20network%20for%20Moravia." target="_blank">Borůvka's algorithm </a>
-            for Minimum Spanning Trees, and 
+            <a href="https://en.wikipedia.org/wiki/Dinic%27s_algorithm" target="_blank">Dinic's algorithm </a>
+            for Max-Flow
             </li>
             <li>
             <a href="https://en.wikipedia.org/wiki/PageRank#:~:text=PageRank%20(PR)%20is%20an%20algorithm,the%20importance%20of%20website%20pages." target="_blank">Page Rank </a>
-            for determining web search results.
+            for determining web search results (if time).
             </li>
             </ul>
             <p>
@@ -100,18 +101,7 @@
             finding a maximum flow that also minimizes cost. If we have additional time, we will explore these
             extensions to the Ford Fulkerson algorithm [2].</p>
 
-            <h4>2. Minimum Spanning Tree </h4>
-            <p>Another important graph optimization problem is Minimum Spanning Tree (MST). A minimum
-            spanning tree for a fully connected, undirected and weighted graph is a subset of the edges that
-            connect all the vertices without forming cycles and whose edge sum is minimized. There are many
-            popular algorithms for finding an MST in parallel such as Borůvka’s Algorithm. In Borůvka’s
-            algorithm, each vertex starts out in its own tree, then, it greedily adds minimum edges to connect
-            each component until there is only one tree left containing all vertices. On the surface Borůvka’s
-            algorithm is pretty straight forward to parallelize: each component can add its smallest incident
-            each to the graph in parallel. The work and span of Borůvka’s are 𝑂 (𝐸𝑙𝑜𝑔𝑉 ) and 𝑂 (𝑙𝑜𝑔𝑉 ) but
-            further optimizations can be done to improve the work bounds [3].</p>
-
-            <h4>3. PageRank</h4>
+            <h4>3. PageRank (if time)</h4>
             <p>PageRank is a newer graph algorithm designed by Larry Page and Sergey Brin for ranking the
             importance of web pages for their search engine, Google. The algorithm judges the importance
             of a website by estimating the probability that someone randomly clicking links will end up on
@@ -133,57 +123,58 @@
                 is in a different cache-line</li>
               <li>Low computation to communication ratio</li>
               <li>Divergent execution since no two runs of a graph traversal traverse the same path</li>
+              <li>CMU's Graphlab is deprecated meaning that we need to design our own GraphLab-like
+                  language, which we will call GraphLabLite, to test our implementations on this interface
+              </li>
             </ul>
           </div>
           <div id="Resources", class="link">
             <h3>Resources</h3>
-            <p>For this project, we are using Ford Fulkerson starter code from https://www.programiz.com/dsa/ford-
-              fulkerson-algorithm and Bourvka’s algorithm starter code from https://www.geeksforgeeks.org/boruvkas-
-              algorithm-greedy-algo-9/, and will code our own sequential PageRank implementation in Python.
-              We will use these implementations as our correctness tests for our parallel implementations.
+            <p>For this project, we are using Ford Fulkerson starter code from <a href="https://www.programiz.com/dsa/ford-fulkerson-algorithm" target="blank">programiz</a> 
+              and Dinic's starter code from <a href="https://www.geeksforgeeks.org/dinics-algorithm-maximum-flow/#" target="blank">geeksforgeeks</a>,
+              which we will use as our correctness checks for our parallel algorithms.
               After implementing and parallelizing our algorithms, we will be running our implementations
-              on the Gates and PSC machines to test our code on a high number of CPU and GPUs and measure
-              performance and scalability</p>
+              on the Gates and PSC machines to test our code on a high number of CPUs and measure
+              performance and scalability. Additionally, we will also design our own Graph programming lanuage
+              (GraphLabLite) and measure the performance of the algorithms in this Graph interface vs. standard OpenMP.
+            </p>
           </div>
           <div id="Goals and Deliverables", class="link">
             <h3>Goals and Deliverables</h3>
             <h4>1. Plan to Achieve</h4>
             <p>
-              We plan to be able to implement at least 2 of the 3 graph algorithms described above in both
-              OpenMP and GraphLab. Since the span is the same as the work for Ford Fulkerson, achieving
-              a large speedup on this algorithm is unlikely, so any relatively fair speedup is desired for this
-              algorithm. For Boruvka’s algorithm, the maximum theoretical speedup is equal to the number of
-              edges, so we expect to see (and hope to achieve) a more linear speedup with this algorithm.
-              We hope to create interactive visualizations on our website that show the speed differences of
-              each algorithm on the different platforms; for example, we may have progress bars all starting at
-              the same time to help the user visualize the speedup differences between platforms, showing each
-              platform’s "progress" through the given algorithm on a specified graph.
-              We will also demonstrate speedup graphs comparing OpenMP and GraphLab implementations
-              to each other, and to the sequential naive versions of each algorithm. In addition, we will also
-              produce plots timing various sections of each algorithm across the different platforms. In doing this,
-              we hope to be able to produce an analysis comparing the trade offs of the GraphLab and OpenMP
-              languages.
+              We plan to be able to implement at least 2 of the 3 graph algorithms described above in
+              OpenMP. Additionally, we also hope to implement our own GraphLab-like interface,
+              GraphLabLite, and create versions of each algorithm that can be represetned in this
+              interface. We aim to show numerous graphs comparing each of
+              our implementations (Ford Fulkerson and Dinics using our various BFS parallziations 
+              as well as using our GraphLabLite implementation) across graphs of
+              varying types and sizes. For example, we may choose to show the timing of each
+              implementation on dense layer graphs of varying number of nodes and varying
+              number of layers, or compare the implementation on graphs with the same num-
+              ber of nodes but different ”types” / other properties (hence the importance our
+              flexible graph generating script). Moreover, we will also produce plots of our
+              results scaling with the number of processors.
             </p>
             <h4>2. Hope to Achieve</h4>
             <p>If time allows, we will also implement the PageRank algorithm to have a further metric of comparison
-              between GraphLab and OpenMP. Furthermore, if we are extra ahead of schedule we will also
-              consider an implementation in MPI, since for very large graphs message passing might be more
+              between GraphLabLite, which we aim to implement, and OpenMP. Furthermore, if we are extra ahead of 
+              schedule we will also consider an implementation in MPI, since for very large graphs message passing might be more
               efficient than OpenMP, given that very large graphs may be too large to fit in one memory system.
               If we are struggling to complete all of the implementations on all of the platforms, we will simply
-              focus on one algorithm and do a more in-depth analysis on the differences in OpenMP and Graphlab
+              focus on one algorithm and do a more in-depth analysis on the differences in OpenMP and GraphLabLite
               for that specific algorithm.</p>
           </div>
           <div id="Platform", class="link">
             <h3>Platform Choice</h3>
-            <p>We are exploring GraphLab for one of our implementation platforms because this language is
+            <p>We are exploring our own form of GraphLab for one of our implementation platforms because this language is
               specifically designed and optimized for parallelizing graph algorithms. We will compare this to
               OpenMP, since this a shared memory platform, and graph problems will require updating lots
               of shared memory locations. We are mainly considering CPU implementations rather than GPU,
               because graph traversal algorithms are highly divergent and may not benefit from GPUs.
-              3
               </p>
           </div>
-          <div id="Planned Schedule", class="link">
+          <div id="Schedule", class="link">
             <h3>Updated Schedule</h3>
             <table>
               <tr>
@@ -229,8 +220,13 @@
             <div class="grid-item"><img class="profile_img" src="scott.jpeg"/></div>
             <div class="grid-item"><b>Sophia Zalewski</b></div>
             <div class="grid-item"><b>Scott Routledge</b></div>
-            <div class="grid-item"><a href="https://www.linkedin.com/in/sophia-zalewski-70a7121aa/">Linkedin</a></div>
-            <div class="grid-item">Linkedin: </div>
+            <div class="grid-item">
+              <a href="https://www.linkedin.com/in/sophia-zalewski-70a7121aa/" target="_blank" 
+                style="color:white;">Linkedin</a>
+            </div>
+            <div class="grid-item">
+              <a href="https://www.linkedin.com/in/scott-routledge/" target="_blank" style="color:white;">Linkedin</a>
+            </div>
         </div>
     </body>
 </html>
